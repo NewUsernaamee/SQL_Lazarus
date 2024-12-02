@@ -1,0 +1,120 @@
+object Form1: TForm1
+  Left = 492
+  Height = 468
+  Top = 174
+  Width = 1212
+  Caption = 'Form1'
+  ClientHeight = 468
+  ClientWidth = 1212
+  DesignTimePPI = 120
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '3.6.0.0'
+  object DBGrid1: TDBGrid
+    Left = 2
+    Height = 248
+    Top = 0
+    Width = 1192
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource1
+    ShowHint = True
+    TabOrder = 0
+    OnCellClick = DBGrid1CellClick
+  end
+  object Button1: TButton
+    Left = 8
+    Height = 31
+    Top = 264
+    Width = 104
+    Caption = 'Add Data'
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 152
+    Height = 31
+    Top = 264
+    Width = 102
+    Caption = 'SaveChanges'
+    TabOrder = 2
+    OnClick = Button2Click
+  end
+  object DeleteBTN: TButton
+    Left = 288
+    Height = 31
+    Top = 264
+    Width = 112
+    Caption = 'Delete selected'
+    TabOrder = 3
+    OnClick = DeleteBTNClick
+  end
+  object sortById: TButton
+    Left = 8
+    Height = 31
+    Top = 321
+    Width = 104
+    Caption = 'Sort by id'
+    TabOrder = 4
+    OnClick = sortByIdClick
+  end
+  object SortByName: TButton
+    Left = 152
+    Height = 31
+    Top = 320
+    Width = 102
+    Caption = 'SortByName'
+    TabOrder = 5
+    OnClick = SortByNameClick
+  end
+  object Edit1: TEdit
+    Left = 8
+    Height = 28
+    Top = 392
+    Width = 100
+    TabOrder = 6
+    OnChange = Edit1Change
+  end
+  object search: TButton
+    Left = 8
+    Height = 31
+    Top = 424
+    Width = 94
+    Caption = 'search'
+    TabOrder = 7
+    OnClick = searchClick
+  end
+  object SearchByName: TLabel
+    Left = 12
+    Height = 20
+    Top = 370
+    Width = 108
+    Caption = 'Search By Name'
+    OnClick = SearchByNameClick
+  end
+  object DBGrid2: TDBGrid
+    Left = 768
+    Height = 206
+    Top = 249
+    Width = 426
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource2
+    TabOrder = 8
+  end
+  object DataSource1: TDataSource
+    DataSet = DataModule1.SQLQuery1
+    Left = 824
+    Top = 16
+  end
+  object MainMenu1: TMainMenu
+    Left = 720
+    Top = 16
+  end
+  object DataSource2: TDataSource
+    DataSet = DataModule1.SQLQuery2
+    Left = 888
+    Top = 16
+  end
+end

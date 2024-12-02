@@ -1,0 +1,187 @@
+object DataModule1: TDataModule1
+  OldCreateOrder = False
+  Height = 188
+  HorizontalOffset = 414
+  VerticalOffset = 258
+  Width = 303
+  PPI = 120
+  object MySQL80Connection1: TMySQL80Connection
+    Connected = True
+    LoginPrompt = False
+    AfterConnect = MySQL80Connection1AfterConnect
+    DatabaseName = 'diseases'
+    KeepConnection = False
+    Params.Strings = (
+      'Port=3306'
+    )
+    Password = '12345'
+    Transaction = SQLTransaction1
+    UserName = 'root'
+    CharSet = 'utf8'
+    HostName = '127.0.0.1'
+    SkipLibraryVersionCheck = False
+    Left = 20
+    Top = 10
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = True
+    Database = MySQL80Connection1
+    Left = 100
+    Top = 10
+  end
+  object SQLQuery1: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'sex'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 6
+      end    
+      item
+        Name = 'name'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end    
+      item
+        Name = 'SName'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end    
+      item
+        Name = 'patronym'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end    
+      item
+        Name = 'Birthday'
+        DataType = ftDateTime
+        Precision = -1
+      end    
+      item
+        Name = 'age_ID'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    Active = True
+    Database = MySQL80Connection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM patients'
+      ''
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO patients ( name, sex, SName, patronym, birthday, age_ID)'
+      'VALUES ( :name, :sex, :SName, :patronym, :birthday, :age_ID)'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 210
+    Top = 10
+  end
+  object SQLTransaction2: TSQLTransaction
+    Active = True
+    Database = MySQL80Connection1
+    Left = 96
+    Top = 88
+  end
+  object SQLQuery2: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'sex'
+        DataType = ftFixedChar
+        Precision = -1
+        Size = 6
+      end    
+      item
+        Name = 'name'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end    
+      item
+        Name = 'SName'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end    
+      item
+        Name = 'patronym'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end    
+      item
+        Name = 'Birthday'
+        DataType = ftDateTime
+        Precision = -1
+      end    
+      item
+        Name = 'age_ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'patients_id'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'deseases_diseasesCode'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'diseaseCode'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'deseasegroup_GroupId'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'deseaseName'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end>
+    Active = True
+    Database = MySQL80Connection1
+    Transaction = SQLTransaction2
+    SQL.Strings = (
+      'SELECT diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases'
+      'WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id'
+      'AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode'
+      'AND diseases.patients.id = ''4'';'
+      ''
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO patients ( name, sex, SName, patronym, birthday, age_ID)'
+      'VALUES ( :name, :sex, :SName, :patronym, :birthday, :age_ID)'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 210
+    Top = 96
+  end
+end
