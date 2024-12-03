@@ -30,7 +30,7 @@ type
     procedure birthdayChange(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure DBGrid1CellClick(Column: TColumn);
+    procedure DBGrid1CellClick(Sender: TObject; ACol,ARow: Integer);
     procedure SearchByNameClick(Sender: TObject);
     procedure searchClick(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
@@ -80,17 +80,21 @@ begin
     Unit2.DataModule1.SQLQuery1.SQLTransaction.CommitRetaining;
 end;
 
-procedure TForm1.DBGrid1CellClick(Column: TColumn);
-var s:string;
+procedure TForm1.DBGrid1CellClick(Sender: TObject; ACol, ARow: Integer);
+var
+  patientID: string;
 begin
- // if Column.Index = 0
- // then
+  // Используем ACol для получения индекса кликнутого столбца.
+  // Предполагаем, что ID находится в первом столбце (индекс 0).
+
+  if ARow >= 0 then // Проверка на корректный номер строки
   begin
-         S := DBGrid1.Columns[1].Field.AsString;
-         Unit2.DataModule1.SQLQuery2.Active := FALSE;
-       Unit2.DataModule1.SQLQuery2.SQL.Text :=  'SELECT diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode AND diseases.patients.id ='+char(39) + S + char(39)+';' ;
-                                     ;
-       Unit2.DataModule1.SQLQuery2.Active := TRUE;
+
+     patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[ACol].FieldName).AsString;
+   // patientID = DBGrid1. GetText(ARow, 0);
+    Unit2.DataModule1.SQLQuery2.Active := False;
+    Unit2.DataModule1.SQLQuery2.SQL.Text :=  'SELECT diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode AND diseases.patients.id ='+char(39) + patientID + char(39)+';' ;
+    Unit2.DataModule1.SQLQuery2.Active := TRUE;
 
   end;
 end;
