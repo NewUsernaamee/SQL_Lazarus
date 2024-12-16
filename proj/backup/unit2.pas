@@ -15,8 +15,10 @@ type
     MySQL80Connection1: TMySQL80Connection;
     SQLQuery1: TSQLQuery;
     SQLQuery2: TSQLQuery;
+    SQLQuery3: TSQLQuery;
     SQLTransaction1: TSQLTransaction;
     SQLTransaction2: TSQLTransaction;
+    SQLTransaction3: TSQLTransaction;
     procedure MySQL80Connection1AfterConnect(Sender: TObject);
   private
 

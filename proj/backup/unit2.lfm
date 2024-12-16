@@ -1,6 +1,6 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Height = 188
+  Height = 240
   HorizontalOffset = 414
   VerticalOffset = 258
   Width = 303
@@ -100,6 +100,36 @@ object DataModule1: TDataModule1
     MaxIndexesCount = 4
     FieldDefs = <    
       item
+        Name = 'deseaseName'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end>
+    Active = True
+    Database = MySQL80Connection1
+    Transaction = SQLTransaction2
+    SQL.Strings = (
+      'SELECT diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases'
+      'WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id'
+      'AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode'
+      'AND diseases.patients.id = ''4'';'
+      ''
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO patients ( name, sex, SName, patronym, birthday, age_ID)'
+      'VALUES ( :name, :sex, :SName, :patronym, :birthday, :age_ID)'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 210
+    Top = 96
+  end
+  object SQLQuery3: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
         Name = 'diseaseCode'
         DataType = ftInteger
         Precision = -1
@@ -117,22 +147,20 @@ object DataModule1: TDataModule1
       end>
     Active = True
     Database = MySQL80Connection1
-    Transaction = SQLTransaction2
+    Transaction = SQLTransaction1
     SQL.Strings = (
-      'SELECT diseases.deseases.diseaseCode,diseases.deseases.deseasegroup_GroupId,diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases'
-      'WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id'
-      'AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode'
-      'AND diseases.patients.id = ''4'';'
-      ''
-    )
-    InsertSQL.Strings = (
-      'INSERT INTO patients ( name, sex, SName, patronym, birthday, age_ID)'
-      'VALUES ( :name, :sex, :SName, :patronym, :birthday, :age_ID)'
+      'SELECT * FROM diseases.deseases;'
       ''
     )
     Params = <>
     Macros = <>
     Left = 210
-    Top = 96
+    Top = 159
+  end
+  object SQLTransaction3: TSQLTransaction
+    Active = False
+    Database = MySQL80Connection1
+    Left = 100
+    Top = 160
   end
 end

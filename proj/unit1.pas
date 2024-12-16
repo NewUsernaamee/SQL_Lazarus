@@ -17,6 +17,11 @@ type
     Button1: TButton;
     Button2: TButton;
     addDisease: TButton;
+    AddDeseasesToBase: TButton;
+    SaveDeseasesBase: TButton;
+    DataSource3: TDataSource;
+    DBGrid3: TDBGrid;
+    DeleteDeseasesFromBase: TButton;
     DesisesEdit: TEdit;
     SaveButtonDesis: TButton;
     deleteDisease: TButton;
@@ -69,9 +74,9 @@ var sortNameStatus:boolean;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
     try
-      Unit2.DataModule1.SQLQuery1.Insert;
+      Unit2.DataModule1.SQLQuery3.Insert;
       ShowMessage('Запрос выполнен успешно. Данные загружены.');
-      Unit2.DataModule1.SQLQuery1.Active:=TRUE;
+      Unit2.DataModule1.SQLQuery3.Active:=TRUE;
     except
     on E: Exception do
         ShowMessage('Ошибка при выполнении запроса: ' + E.Message);
@@ -81,8 +86,8 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 begin
 
-    Unit2.DataModule1.SQLQuery1.ApplyUpdates;
-    Unit2.DataModule1.SQLQuery1.SQLTransaction.CommitRetaining;
+    Unit2.DataModule1.SQLQuery3.ApplyUpdates;
+    Unit2.DataModule1.SQLQuery3.SQLTransaction.CommitRetaining;
 end;
 
 procedure TForm1.addDiseaseClick(Sender: TObject);
@@ -94,7 +99,7 @@ begin
      Desease:= DesisesEdit.Text;
   try
       Unit2.DataModule1.SQLQuery2.Active := False;
-       Unit2.DataModule1.SQLQuery2.SQL.Text :=//Настя допиши запрос на добавление
+       Unit2.DataModule1.SQLQuery2.SQL.Text := 'Настя допиши запрос на добавление';
        Unit2.DataModule1.SQLQuery2.Active := TRUE;
       ShowMessage('Запрос выполнен успешно. Данные загружены.');
     except
@@ -128,7 +133,7 @@ begin
        patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[0].FieldName).AsString;
        Desease := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[2].FieldName).AsString;
        Unit2.DataModule1.SQLQuery2.Active := False;
-       Unit2.DataModule1.SQLQuery2.SQL.Text :=//Настя допиши запрос на удаление
+       Unit2.DataModule1.SQLQuery2.SQL.Text :='Настя допиши запрос на удаление';
        Unit2.DataModule1.SQLQuery2.Active := TRUE;
   end;
 end;
@@ -208,9 +213,9 @@ end;
 
 procedure TForm1.DeleteBTNClick(Sender: TObject);
 begin
-  if not (Unit2.DataModule1.SQLQuery1.EOF and Unit2.DataModule1.SQLQuery1.BOF) then
+  if not (Unit2.DataModule1.SQLQuery3.EOF and Unit2.DataModule1.SQLQuery3.BOF) then
   begin
-       Unit2.DataModule1.SQLQuery1.Delete;
+       Unit2.DataModule1.SQLQuery3.Delete;
   end;
 end;
 

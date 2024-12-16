@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 492
+  Left = 68
   Height = 468
-  Top = 174
-  Width = 1212
+  Top = 169
+  Width = 1799
   Caption = 'Form1'
   ClientHeight = 468
-  ClientWidth = 1212
+  ClientWidth = 1799
   DesignTimePPI = 120
   Menu = MainMenu1
   OnCreate = FormCreate
@@ -94,7 +94,7 @@ object Form1: TForm1
     OnClick = SearchByNameClick
   end
   object DBGrid2: TDBGrid
-    Left = 600
+    Left = 608
     Height = 248
     Top = 0
     Width = 604
@@ -139,9 +139,46 @@ object Form1: TForm1
     TextHint = 'Diseases Name'
     OnChange = DesisesEditChange
   end
+  object DBGrid3: TDBGrid
+    Left = 1208
+    Height = 248
+    Top = 0
+    Width = 592
+    Color = clWindow
+    Columns = <>
+    DataSource = DataSource3
+    TabOrder = 13
+  end
+  object AddDeseasesToBase: TButton
+    Left = 1232
+    Height = 31
+    Top = 264
+    Width = 104
+    Caption = 'Add Data'
+    TabOrder = 14
+    OnClick = Button1Click
+  end
+  object SaveDeseasesBase: TButton
+    Left = 1376
+    Height = 31
+    Top = 264
+    Width = 102
+    Caption = 'SaveChanges'
+    TabOrder = 15
+    OnClick = Button2Click
+  end
+  object DeleteDeseasesFromBase: TButton
+    Left = 1512
+    Height = 31
+    Top = 264
+    Width = 112
+    Caption = 'Delete selected'
+    TabOrder = 16
+    OnClick = DeleteBTNClick
+  end
   object DataSource1: TDataSource
     DataSet = DataModule1.SQLQuery1
-    Left = 824
+    Left = 808
     Top = 16
   end
   object MainMenu1: TMainMenu
@@ -150,7 +187,12 @@ object Form1: TForm1
   end
   object DataSource2: TDataSource
     DataSet = DataModule1.SQLQuery2
-    Left = 888
+    Left = 896
+    Top = 16
+  end
+  object DataSource3: TDataSource
+    DataSet = DataModule1.SQLQuery3
+    Left = 984
     Top = 16
   end
 end

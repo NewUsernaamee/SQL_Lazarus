@@ -1,6 +1,6 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
-  Height = 188
+  Height = 240
   HorizontalOffset = 414
   VerticalOffset = 258
   Width = 303
@@ -100,16 +100,6 @@ object DataModule1: TDataModule1
     MaxIndexesCount = 4
     FieldDefs = <    
       item
-        Name = 'diseaseCode'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'deseasegroup_GroupId'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
         Name = 'deseaseName'
         DataType = ftString
         Precision = -1
@@ -134,5 +124,43 @@ object DataModule1: TDataModule1
     Macros = <>
     Left = 210
     Top = 96
+  end
+  object SQLQuery3: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'diseaseCode'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'deseasegroup_GroupId'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'deseaseName'
+        DataType = ftString
+        Precision = -1
+        Size = 45
+      end>
+    Active = True
+    Database = MySQL80Connection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM diseases.deseases;'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 210
+    Top = 159
+  end
+  object SQLTransaction3: TSQLTransaction
+    Active = False
+    Database = MySQL80Connection1
+    Left = 100
+    Top = 160
   end
 end

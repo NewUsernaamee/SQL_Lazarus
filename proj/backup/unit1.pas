@@ -17,6 +17,11 @@ type
     Button1: TButton;
     Button2: TButton;
     addDisease: TButton;
+    AddDeseasesToBase: TButton;
+    SaveDeseasesBase: TButton;
+    DataSource3: TDataSource;
+    DBGrid3: TDBGrid;
+    DeleteDeseasesFromBase: TButton;
     DesisesEdit: TEdit;
     SaveButtonDesis: TButton;
     deleteDisease: TButton;
@@ -94,7 +99,7 @@ begin
      Desease:= DesisesEdit.Text;
   try
       Unit2.DataModule1.SQLQuery2.Active := False;
-       Unit2.DataModule1.SQLQuery2.SQL.Text :=//Настя допиши запрос на добавление
+       Unit2.DataModule1.SQLQuery2.SQL.Text := 'Настя допиши запрос на добавление';
        Unit2.DataModule1.SQLQuery2.Active := TRUE;
       ShowMessage('Запрос выполнен успешно. Данные загружены.');
     except
@@ -128,7 +133,7 @@ begin
        patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[0].FieldName).AsString;
        Desease := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[2].FieldName).AsString;
        Unit2.DataModule1.SQLQuery2.Active := False;
-       Unit2.DataModule1.SQLQuery2.SQL.Text :=//Настя допиши запрос   на удаление
+       Unit2.DataModule1.SQLQuery2.SQL.Text :='Настя допиши запрос на удаление';
        Unit2.DataModule1.SQLQuery2.Active := TRUE;
   end;
 end;
