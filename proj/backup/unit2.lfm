@@ -100,55 +100,6 @@ object DataModule1: TDataModule1
     MaxIndexesCount = 4
     FieldDefs = <    
       item
-        Name = 'id'
-        DataType = ftAutoInc
-        Precision = -1
-      end    
-      item
-        Name = 'sex'
-        DataType = ftFixedChar
-        Precision = -1
-        Size = 6
-      end    
-      item
-        Name = 'name'
-        DataType = ftString
-        Precision = -1
-        Size = 45
-      end    
-      item
-        Name = 'SName'
-        DataType = ftString
-        Precision = -1
-        Size = 45
-      end    
-      item
-        Name = 'patronym'
-        DataType = ftString
-        Precision = -1
-        Size = 45
-      end    
-      item
-        Name = 'Birthday'
-        DataType = ftDateTime
-        Precision = -1
-      end    
-      item
-        Name = 'age_ID'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'patients_id'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'deseases_diseasesCode'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
         Name = 'diseaseCode'
         DataType = ftInteger
         Precision = -1
@@ -168,7 +119,7 @@ object DataModule1: TDataModule1
     Database = MySQL80Connection1
     Transaction = SQLTransaction2
     SQL.Strings = (
-      'SELECT diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases'
+      'SELECT diseases.deseases.diseaseCode,diseases.deseases.deseasegroup_GroupId,diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases'
       'WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id'
       'AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode'
       'AND diseases.patients.id = ''4'';'

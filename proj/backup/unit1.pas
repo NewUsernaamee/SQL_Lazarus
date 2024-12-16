@@ -16,6 +16,10 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    addDisease: TButton;
+    DesisesEdit: TEdit;
+    SaveButtonDesis: TButton;
+    deleteDisease: TButton;
     DataSource2: TDataSource;
     DBGrid2: TDBGrid;
     SearchByName: TLabel;
@@ -30,7 +34,11 @@ type
     procedure birthdayChange(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure addDiseaseClick(Sender: TObject);
     procedure DBGrid1CellClick(Sender: TObject; ACol,ARow: Integer);
+    procedure deleteDiseaseClick(Sender: TObject);
+    procedure DesisesEditChange(Sender: TObject);
+    procedure SaveButtonDesisClick(Sender: TObject);
     procedure SearchByNameClick(Sender: TObject);
     procedure searchClick(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
@@ -60,8 +68,6 @@ var sortNameStatus:boolean;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  if  True  then
-  begin
     try
       Unit2.DataModule1.SQLQuery1.Insert;
       ShowMessage('Запрос выполнен успешно. Данные загружены.');
@@ -70,7 +76,6 @@ begin
     on E: Exception do
         ShowMessage('Ошибка при выполнении запроса: ' + E.Message);
     end;
-  end;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -80,23 +85,64 @@ begin
     Unit2.DataModule1.SQLQuery1.SQLTransaction.CommitRetaining;
 end;
 
+procedure TForm1.addDiseaseClick(Sender: TObject);
+Var
+  patientID: string;
+  Desease: string;
+begin
+     patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[0].FieldName).AsString;
+     Desease:= DesisesEdit.Text;
+  try
+      Unit2.DataModule1.SQLQuery2.Active := False;
+       Unit2.DataModule1.SQLQuery2.SQL.Text :=//Настя допиши запрос на добавление
+       Unit2.DataModule1.SQLQuery2.Active := TRUE;
+      ShowMessage('Запрос выполнен успешно. Данные загружены.');
+    except
+    on E: Exception do
+        ShowMessage('Ошибка при выполнении запроса: ' + E.Message);
+    end;
+end;
+
 procedure TForm1.DBGrid1CellClick(Sender: TObject; ACol, ARow: Integer);
 var
   patientID: string;
 begin
-  // Используем ACol для получения индекса кликнутого столбца.
-  // Предполагаем, что ID находится в первом столбце (индекс 0).
-
   if ARow >= 0 then // Проверка на корректный номер строки
   begin
 
-     patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[ACol].FieldName).AsString;
-   // patientID = DBGrid1. GetText(ARow, 0);
+     patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[0].FieldName).AsString;
     Unit2.DataModule1.SQLQuery2.Active := False;
     Unit2.DataModule1.SQLQuery2.SQL.Text :=  'SELECT diseases.deseases.deseaseName FROM diseases.deseases, diseases.patients, diseases.patients_has_deseases WHERE diseases.patients.id = diseases.patients_has_deseases.patients_id AND diseases.patients_has_deseases.deseases_diseasesCode = diseases.deseases.diseaseCode AND diseases.patients.id ='+char(39) + patientID + char(39)+';' ;
     Unit2.DataModule1.SQLQuery2.Active := TRUE;
 
   end;
+end;
+
+procedure TForm1.deleteDiseaseClick(Sender: TObject);
+Var
+  patientID: string;
+  Desease: string;
+begin
+   if not (Unit2.DataModule1.SQLQuery1.EOF and Unit2.DataModule1.SQLQuery1.BOF) then
+  begin
+       patientID := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[0].FieldName).AsString;
+       Desease := DBGrid1.DataSource.DataSet.FieldByName(DBGrid1.Columns[2].FieldName).AsString;
+       Unit2.DataModule1.SQLQuery2.Active := False;
+       Unit2.DataModule1.SQLQuery2.SQL.Text :=//Настя допиши запрос   на удаление
+       Unit2.DataModule1.SQLQuery2.Active := TRUE;
+  end;
+end;
+
+procedure TForm1.DesisesEditChange(Sender: TObject);
+begin
+
+end;
+
+procedure TForm1.SaveButtonDesisClick(Sender: TObject);
+begin
+  
+    Unit2.DataModule1.SQLQuery2.ApplyUpdates;
+    Unit2.DataModule1.SQLQuery2.SQLTransaction.CommitRetaining;
 end;
 
 procedure TForm1.SearchByNameClick(Sender: TObject);
